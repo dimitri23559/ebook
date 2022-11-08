@@ -21,7 +21,7 @@ use App\Http\Controllers\SIswaController;
 */
 
 Route ::resource('siswa',SIswaController::class);
-Route ::resource('books',Bookcontroller::class);
+Route::apiResource('books',Bookcontroller::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -85,38 +85,37 @@ class Bookcontroller extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
-        $table = Book::find($book);
-        if($table){
-            $table->title = $request->title ? $request->title : $table->title;
-            $table->description = $request->description ? $request->description : $table->description;
-            $table->author = $request->author ? $request->author : $table->author;
-            $table->publisher = $request->publisher ? $request->publisher : $table->publisher;
-            $table->date_of_issue = $request->date_of_issue ? $request->date_of_issue : $table->date_of_issue;
-            $table->save();
+        $data = Book::find($id);
+        if($data){
+            $data->title = $request->title ? $request->title : $data->title;
+            $data->description = $request->description ? $request->description : $data->description;
+            $data->author = $request->author ? $request->author : $data->author;
+            $data->publisher = $request->publisher ? $request->publisher : $data->publisher;
+            $data->date_of_issue = $request->date_of_issue ? $request->date_of_issue : $data->date_of_issue;
+            $data->save();
 
-            return $table;
+            return $data;
         }else{
-            return ["message"=>"Data Book Not Found!"];
+            return ["message" => "Data  Tidak  Ditemukan"];
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Book  $book
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Book $book)
+    // **
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  \App\Models\Book  $
+    //  * @return \Illuminate\Http\Response
+    //  *
+    public function destroy($id)
     {
-        $table = Book::find($book);
-        if($table){
-            $table->delete();
-
-            return ["message"=>"Delete Book Success!"]; 
+        $data = Book::find($id);
+        if($data){
+            $data->delete();
+            return ["message" => "Data Berhasil Di Hapus"];
         }else{
-            return ["message"=>"Data Book Not Found!"];
+            return ["message" => "Data Tidak Ditemukan"];
         }
     }
 }
